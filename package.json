@@ -1,0 +1,16 @@
+{
+  "name": "03-webpack-inicial",
+  "version": "1.0.0",
+  "description": "Cascaron de proyecto WebPack",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack"
+  },
+  "author": "jValdezR",
+  "license": "ISC",
+  "devDependencies": {
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12"
+  }
+}
