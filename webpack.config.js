@@ -1,9 +1,11 @@
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
+
 module.exports = {
 
-    mode: 'production',
+    mode: 'development',
     optimization: {
         minimizer: [new OptimizeCssAssetsPlugin()]
     },
@@ -28,8 +30,8 @@ module.exports = {
                 test: /\.html$/,
                 loader: 'html-loader',
                 options: {
-                    minimize: false,
                     attributes: false,
+                    minimize: false
                 },
             },
             {
@@ -53,12 +55,15 @@ module.exports = {
         new MiniCssExtractPlugin({
             flename: '[name].css',
             ignoreOrder: false
-        })
+        }),
+        new CopyPlugin({
+            patterns: [
+                { from: 'src/assets', to: 'assets/' },
+                //{ from: 'other', to: 'public' },
+            ],
+        }),
+
     ]
-
-
-
-
 }
 
 
