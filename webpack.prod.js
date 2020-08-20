@@ -6,12 +6,21 @@ const MinifyPlugin = require("babel-minify-webpack-plugin");
 
 module.exports = {
 
-    mode: 'development',
+    mode: 'production',
     optimization: {
         minimizer: [new OptimizeCssAssetsPlugin()]
     },
+
+    output: {
+        filename: 'main.[contentHash].js'
+    },
     module: {
         rules: [
+
+            { 
+                test: /\.js$/, 
+                exclude: /node_modules/, 
+                loader: "babel-loader" },
             {
                 test: /\.css$/,
                 exclude: /styles\.css$/,
@@ -54,7 +63,7 @@ module.exports = {
             filename: './index.html'
         }),
         new MiniCssExtractPlugin({
-            flename: '[name].css',
+            flename: '[name].[contentHash].css',
             ignoreOrder: false
         }),
         new CopyPlugin({
@@ -63,7 +72,7 @@ module.exports = {
                 //{ from: 'other', to: 'public' },
             ],
         }),
-        new MinifyPlugin(),
+        new MinifyPlugin()
 
     ]
 }
